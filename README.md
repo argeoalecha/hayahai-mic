@@ -20,8 +20,8 @@ A modern karaoke application built with React + TypeScript + Vite that lets you 
 
 ### 1. Clone & Install
 ```bash
-git clone [repository-url]
-cd videoke-app
+git clone https://github.com/argeoalecha/hayahai-mic.git
+cd hayahai-mic
 npm install
 ```
 
