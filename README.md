@@ -1,18 +1,30 @@
 # 🎤 YouTube Videoke App
 
-A modern karaoke application built with React + TypeScript + Vite that lets you search for songs on YouTube and create karaoke playlists with real-time scoring.
+A professional karaoke application built with **Next.js 14** + **TypeScript** that lets you search for songs on YouTube and create karaoke playlists with real-time scoring and microphone controls.
 
 ## ✨ Features
 
-- **YouTube Integration**: Search for karaoke songs with automatic embedding support
-- **Smart Filtering**: Only shows embeddable videos (no "Video unavailable" errors)
-- **Queue Management**: Drag-and-drop song reordering, auto-advance between songs
-- **Real-time Scoring**: Live scoring system with microphone controls
-- **Modern UI**: Beautiful blue gradient design with glass-morphism effects
-- **Responsive Design**: Works on desktop and mobile devices
-- **Three-Panel Interface**: Professional karaoke layout (Queue | Video | Score)
+- **🎵 YouTube Integration**: Search for karaoke songs with automatic embedding support
+- **🚫 Smart Filtering**: Only shows embeddable videos (no "Video unavailable" errors)  
+- **📝 Queue Management**: Drag-and-drop song reordering, auto-advance between songs
+- **⚡ Real-time Scoring**: Live scoring system (0-100) with performance metrics
+- **🎤 Microphone Controls**: Volume slider, mute, audio visualization
+- **🎨 Modern UI**: Beautiful blue gradient design with glass-morphism effects
+- **📱 Responsive Design**: Perfect on desktop, tablet, and mobile devices
+- **🏗️ Professional Architecture**: Next.js 14 App Router, TypeScript, Tailwind CSS
 
-## 🚀 Quick Start for External Testers
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: React Spring
+- **YouTube**: React YouTube + YouTube Data API v3
+- **Audio**: Web Audio API
+- **Testing**: Playwright
+- **Deployment**: Vercel-ready
+
+## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+ installed
@@ -20,27 +32,30 @@ A modern karaoke application built with React + TypeScript + Vite that lets you 
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/argeoalecha/hayahai-mic.git
-cd hayahai-mic
+git clone <your-repository-url>
+cd videoke-app
 npm install
 ```
 
-### 2. Set Up YouTube API Key
+### 2. Set Up YouTube API Key (Next.js Format)
 1. Go to [Google Cloud Console](https://console.developers.google.com/)
 2. Create a new project or select existing
 3. Enable "YouTube Data API v3"
 4. Create credentials → API Key
-5. Copy `.env.example` to `.env`:
+5. Create `.env.local` file:
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
-6. Replace `YOUR_YOUTUBE_API_KEY_HERE` with your actual API key
+6. Edit `.env.local` and replace `YOUR_YOUTUBE_API_KEY_HERE` with your actual API key:
+```bash
+NEXT_PUBLIC_YOUTUBE_API_KEY=your_actual_api_key_here
+```
 
-### 3. Run the App
+### 3. Run the Next.js App
 ```bash
 npm run dev
 ```
-Open http://localhost:5173 in your browser
+Open **http://localhost:3000** in your browser
 
 ## 🧪 Testing Guide
 

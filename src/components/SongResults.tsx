@@ -30,14 +30,15 @@ const Results = ({ songs, onSongSelect }: { songs: YouTubeSong[], onSongSelect: 
     {songs.map((song) => (
       <div
         key={song.id}
-        className="p-6 bg-gradient-to-r from-blue-50 to-sky-50 border-2 border-blue-200/50 rounded-2xl hover:from-blue-100 hover:to-sky-100 hover:border-blue-400 hover:shadow-lg transition-all duration-200 relative overflow-hidden"
+        className="p-6 bg-white/80 backdrop-blur-md border border-blue-200/50 rounded-2xl hover:bg-white/90 hover:border-blue-400/70 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
       >
-        <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-sky-400/20 rounded-bl-2xl"></div>
-        <div className="font-semibold text-lg text-gray-900 mb-2 relative z-10">{song.title}</div>
-        <div className="text-blue-600 font-medium mb-4 relative z-10">by {song.channelTitle}</div>
+        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-sky-400/10 rounded-bl-3xl transition-all duration-300 group-hover:from-blue-400/20 group-hover:to-sky-400/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="font-semibold text-lg text-gray-900 mb-2 relative z-10 group-hover:text-blue-900 transition-colors duration-200">{song.title}</div>
+        <div className="text-blue-600 font-medium mb-4 relative z-10 group-hover:text-blue-700 transition-colors duration-200">by {song.channelTitle}</div>
         <button
           onClick={() => onSongSelect(song)}
-          className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-sky-600 transform hover:scale-105 transition-all duration-200 shadow-md relative z-10"
+          className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-sky-500 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-sky-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl relative z-10 group-hover:shadow-2xl"
         >
           ➕ Add to Queue
         </button>

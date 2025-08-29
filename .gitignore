@@ -7,19 +7,32 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Next.js
+.next/
+out/
+build/
+
+# Previous build systems (Vite legacy)
 dist
 dist-ssr
-*.local
 
 # Environment variables
 .env
-.env.local
+.env*.local
 .env.production
 
 # Development/Internal files
 CLAUDE.md
 DEPLOYMENT.md
+
+# Testing
+/coverage
+.nyc_output
+test-results/
+playwright-report/
 
 # Editor directories and files
 .vscode/*
@@ -31,3 +44,9 @@ DEPLOYMENT.md
 *.njsproj
 *.sln
 *.sw?
+
+# MacOS
+.DS_Store
+
+# Screenshots
+ui-screenshot*.png
