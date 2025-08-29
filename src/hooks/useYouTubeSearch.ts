@@ -14,8 +14,10 @@ const checkVideoEmbeddability = async (videoIds: string[]): Promise<Set<string>>
     
     const response = await fetch(url);
     if (!response.ok) {
-      console.warn('Failed to check video embeddability, allowing all videos');
-      return new Set(videoIds); // Allow all if check fails
+
+
+      console.warn('Failed to check video embeddability, returning empty set');
+      return new Set(); // Return empty set on failure
     }
     
     const data: YouTubeVideosResponse = await response.json();
@@ -32,7 +34,7 @@ const checkVideoEmbeddability = async (videoIds: string[]): Promise<Set<string>>
     return embeddableIds;
   } catch (error) {
     console.warn('Error checking video embeddability:', error);
-    return new Set(videoIds); // Allow all if check fails
+    return new Set(); // Return empty set on failure
   }
 };
 

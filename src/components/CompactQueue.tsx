@@ -55,7 +55,7 @@ export const CompactQueue: React.FC<CompactQueueProps> = ({
         <div className="mt-3 pt-3 border-t border-blue-100">
           <div className="text-xs text-gray-500 mb-2">UP NEXT:</div>
           <div className="flex gap-2 overflow-x-auto">
-            {nextSongs.slice(0, 3).map((song, index) => (
+            {nextSongs.map((song, index) => (
               <div
                 key={song.queueId}
                 className="flex-shrink-0 bg-blue-50 px-3 py-2 rounded-xl border border-blue-200"

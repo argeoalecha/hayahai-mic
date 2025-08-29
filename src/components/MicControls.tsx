@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useMicrophone } from '../hooks/useMicrophone';
 
 interface MicControlsProps {
   onVolumeChange?: (volume: number) => void;
@@ -11,42 +12,7 @@ export const MicControls: React.FC<MicControlsProps> = ({
 }) => {
   const [volume, setVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-
-  useEffect(() => {
-    // Request microphone access and start listening
-    const startMicrophoneAccess = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        setIsListening(true);
-        
-        // Create audio context for volume monitoring
-        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        const audioContext = new AudioContextClass();
-        const microphone = audioContext.createMediaStreamSource(stream);
-        const analyser = audioContext.createAnalyser();
-        
-        microphone.connect(analyser);
-        analyser.fftSize = 256;
-        
-        // Monitor microphone volume levels (for visual feedback)
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        
-        const updateVolume = () => {
-          analyser.getByteFrequencyData(dataArray);
-          // Monitor microphone input levels (could be used for visual feedback)
-          requestAnimationFrame(updateVolume);
-        };
-        
-        updateVolume();
-      } catch {
-        console.log('Microphone access denied or not available');
-        setIsListening(false);
-      }
-    };
-
-    startMicrophoneAccess();
-  }, []);
+  const { isListening } = useMicrophone();
 
   const handleVolumeChange = (newVolume: number) => {
     setVolume(newVolume);

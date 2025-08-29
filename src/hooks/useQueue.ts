@@ -46,33 +46,29 @@ export const useQueue = () => {
   }, []);
 
   const playNext = useCallback(() => {
-    if (queue.length === 0) return null;
-    
+    if (queue.length === 0) return;
+
     const nextIndex = currentSongIndex + 1;
     if (nextIndex >= queue.length) {
       setCurrentSongIndex(-1);
-      return null;
+      setQueue([]);
+    } else {
+      setCurrentSongIndex(nextIndex);
     }
-    
-    setCurrentSongIndex(nextIndex);
-    return queue[nextIndex];
   }, [queue, currentSongIndex]);
 
   const playPrevious = useCallback(() => {
-    if (queue.length === 0 || currentSongIndex <= 0) return null;
-    
+    if (queue.length === 0 || currentSongIndex <= 0) return;
+
     const prevIndex = currentSongIndex - 1;
     setCurrentSongIndex(prevIndex);
-    return queue[prevIndex];
   }, [queue, currentSongIndex]);
 
   const playSong = useCallback((queueId: string) => {
     const index = queue.findIndex(item => item.queueId === queueId);
     if (index !== -1) {
       setCurrentSongIndex(index);
-      return queue[index];
     }
-    return null;
   }, [queue]);
 
   const clearQueue = useCallback(() => {

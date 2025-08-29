@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { QueueItem } from '../types';
 import { DraggableQueueItem } from './DraggableQueueItem';
 
 interface QueueSidebarProps {
   queue: QueueItem[];
   currentSongIndex: number;
-  nextSongs: QueueItem[];
   onPlaySong: (queueId: string) => void;
   onRemoveFromQueue: (queueId: string) => void;
   onReorderQueue: (fromIndex: number, toIndex: number) => void;
@@ -17,7 +16,6 @@ interface QueueSidebarProps {
 export const QueueSidebar: React.FC<QueueSidebarProps> = ({
   queue,
   currentSongIndex,
-  nextSongs,
   onPlaySong,
   onRemoveFromQueue,
   onReorderQueue,
@@ -25,26 +23,16 @@ export const QueueSidebar: React.FC<QueueSidebarProps> = ({
   onNext,
   onPrevious,
 }) => {
-  const [, setDraggedIndex] = useState<number>(-1);
   const currentSong = currentSongIndex >= 0 ? queue[currentSongIndex] : null;
-
-  const handleDragStart = (index: number) => {
-    setDraggedIndex(index);
-  };
-
-  const handleDragOver = () => {
-    // Visual feedback could be added here
-  };
 
   const handleDrop = (fromIndex: number, toIndex: number) => {
     if (fromIndex !== toIndex) {
       onReorderQueue(fromIndex, toIndex);
     }
-    setDraggedIndex(-1);
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-blue-200/30 sticky top-4 max-h-[calc(100vh-2rem)] overflow-hidden flex flex-col min-h-[400px] relative">
+    <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-blue-200/30 lg:sticky top-4 max-h-[calc(100vh-2rem)] overflow-hidden flex flex-col min-h-[400px] relative">
       <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
       <div className="flex items-center justify-between mb-6 mt-2">
         <h3 className="text-2xl font-bold text-gray-800 flex items-center">
@@ -94,36 +82,6 @@ export const QueueSidebar: React.FC<QueueSidebarProps> = ({
             </div>
           )}
 
-          {/* Next Songs */}
-          {nextSongs.length > 0 && (
-            <div>
-              <div className="text-sm font-medium text-gray-600 mb-2">🔜 UP NEXT</div>
-              <div className="space-y-2">
-                {nextSongs.map((song, index) => (
-                  <div
-                    key={song.queueId}
-                    className="bg-blue-50 p-3 rounded-xl border border-blue-200 group hover:bg-blue-100 transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">
-                          {index + 1}. {song.title}
-                        </div>
-                        <div className="text-xs text-blue-600">{song.channelTitle}</div>
-                      </div>
-                      <button
-                        onClick={() => onRemoveFromQueue(song.queueId)}
-                        className="opacity-0 group-hover:opacity-100 ml-2 text-red-500 hover:text-red-700 text-xs p-1 transition-opacity"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* All Queue Items - Draggable */}
           <div>
             <div className="text-sm font-medium text-gray-600 mb-2 flex items-center">
@@ -139,8 +97,6 @@ export const QueueSidebar: React.FC<QueueSidebarProps> = ({
                   isCurrentSong={index === currentSongIndex}
                   onPlay={onPlaySong}
                   onRemove={onRemoveFromQueue}
-                  onDragStart={handleDragStart}
-                  onDragOver={handleDragOver}
                   onDrop={handleDrop}
                 />
               ))}

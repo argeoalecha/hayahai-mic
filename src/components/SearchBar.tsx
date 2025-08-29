@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDebounce } from '../hooks/useDebounce';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -7,18 +8,18 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 500);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query.trim()) {
-      onSearch(query.trim());
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
+      onSearch(debouncedQuery.trim());
     }
-  };
+  }, [debouncedQuery, onSearch]);
 
   return (
     <div className="bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl mb-8 border border-blue-200/30 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
-      <form onSubmit={handleSubmit} className="flex gap-4">
+      <form onSubmit={(e) => e.preventDefault()} className="flex gap-4">
         <input
           type="text"
           value={query}

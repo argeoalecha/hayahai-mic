@@ -1,52 +1,43 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 export const useScoring = () => {
   const [score, setScore] = useState(0);
   const [isScoring, setIsScoring] = useState(false);
+  const scoringIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const startScoring = useCallback(() => {
+    if (scoringIntervalRef.current) return;
+
     setIsScoring(true);
     setScore(0);
 
-    // Simulate dynamic scoring based on singing performance
-    // In a real implementation, this would analyze microphone input
-    const scoringInterval = setInterval(() => {
+    scoringIntervalRef.current = setInterval(() => {
       setScore(prevScore => {
-        // Simulate random scoring with slight upward trend
         const change = Math.random() * 10 - 3; // -3 to +7 range
         const newScore = Math.max(0, Math.min(100, prevScore + change));
         return Math.round(newScore);
       });
-    }, 2000); // Update every 2 seconds
-
-    return () => {
-      clearInterval(scoringInterval);
-      setIsScoring(false);
-    };
+    }, 2000);
   }, []);
 
   const stopScoring = useCallback(() => {
+    if (scoringIntervalRef.current) {
+      clearInterval(scoringIntervalRef.current);
+      scoringIntervalRef.current = null;
+    }
     setIsScoring(false);
   }, []);
 
   const resetScore = useCallback(() => {
     setScore(0);
-    setIsScoring(false);
-  }, []);
-
-  // Auto-start scoring when a song begins (simulated)
-  useEffect(() => {
-    if (isScoring) {
-      const cleanup = startScoring();
-      return cleanup;
-    }
-  }, [isScoring, startScoring]);
+    stopScoring();
+  }, [stopScoring]);
 
   return {
     score,
     isScoring,
-    startScoring: () => setIsScoring(true),
+    startScoring,
     stopScoring,
-    resetScore
+    resetScore,
   };
 };

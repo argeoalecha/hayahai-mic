@@ -31,35 +31,31 @@ function App() {
 
   const handleSongSelect = (song: YouTubeSong) => {
     addToQueue(song);
-    // If no song is currently playing, start playing the first song in queue
-    if (currentSongIndex === -1) {
-      // Use setTimeout to ensure the queue is updated first
-      setTimeout(() => {
-        playNext(); // This will play the first song (index 0)
-      }, 0);
-    }
   };
+
+  // When a song is added to an empty queue, start playing it
+  React.useEffect(() => {
+    if (queue.length === 1 && currentSongIndex === -1) {
+      playNext();
+    }
+  }, [queue, currentSongIndex, playNext]);
 
   const handleVideoEnd = () => {
     stopScoring();
     playNext();
   };
 
+  const handleVideoPlay = () => {
+    if (!isScoring) {
+      startScoring();
+    }
+  };
+
   const handleNextSong = () => {
     stopScoring();
     resetScore();
     playNext();
-    if (currentSong) {
-      setTimeout(() => startScoring(), 1000); // Start scoring after video loads
-    }
   };
-
-  // Start scoring when a new song begins playing
-  React.useEffect(() => {
-    if (currentSong && !isScoring) {
-      setTimeout(() => startScoring(), 2000); // Give video time to load
-    }
-  }, [currentSong, isScoring, startScoring]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-sky-400">
@@ -92,7 +88,6 @@ function App() {
               <QueueSidebar
                 queue={queue}
                 currentSongIndex={currentSongIndex}
-                nextSongs={nextSongs}
                 onPlaySong={playSong}
                 onRemoveFromQueue={removeFromQueue}
                 onReorderQueue={reorderQueue}
@@ -104,7 +99,7 @@ function App() {
 
             {/* Video Player - Center */}
             <div className="lg:col-span-6 space-y-6">
-              <VideoPlayer currentSong={currentSong} onVideoEnd={handleVideoEnd} />
+              <VideoPlayer currentSong={currentSong} onVideoEnd={handleVideoEnd} onVideoPlay={handleVideoPlay} />
               
               {/* Microphone Controls */}
               <MicControls 

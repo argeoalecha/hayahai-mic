@@ -1,38 +1,22 @@
 export const createErrorMessage = (error: unknown, fallback = 'An unexpected error occurred'): string => {
-  if (error instanceof Error) {
-    return error.message;
-  }
-  
-  if (typeof error === 'string') {
-    return error;
-  }
-  
-  return fallback;
+  return error instanceof Error ? error.message : typeof error === 'string' ? error : fallback;
 };
 
 export const isNetworkError = (error: unknown): boolean => {
-  if (error instanceof Error) {
-    return error.message.includes('fetch') || 
-           error.message.includes('network') || 
-           error.message.includes('Failed to fetch');
-  }
-  return false;
+  return error instanceof Error ? /fetch|network|failed to fetch/i.test(error.message) : false;
 };
 
 export const createUserFriendlyError = (error: unknown): string => {
   const message = createErrorMessage(error);
-  
-  if (isNetworkError(error)) {
-    return 'Network error. Please check your internet connection and try again.';
+
+  switch (true) {
+    case isNetworkError(error):
+      return 'Network error. Please check your internet connection and try again.';
+    case /api key/i.test(message):
+      return 'YouTube API key issue. Please check your configuration.';
+    case /quota/i.test(message):
+      return 'YouTube API quota exceeded. Please try again later.';
+    default:
+      return message;
   }
-  
-  if (message.includes('API key')) {
-    return 'YouTube API key issue. Please check your configuration.';
-  }
-  
-  if (message.includes('quota')) {
-    return 'YouTube API quota exceeded. Please try again later.';
-  }
-  
-  return message;
 };

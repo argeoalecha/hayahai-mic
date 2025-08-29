@@ -7,8 +7,6 @@ interface DraggableQueueItemProps {
   isCurrentSong: boolean;
   onPlay: (queueId: string) => void;
   onRemove: (queueId: string) => void;
-  onDragStart: (index: number) => void;
-  onDragOver: (index: number) => void;
   onDrop: (fromIndex: number, toIndex: number) => void;
 }
 
@@ -18,18 +16,14 @@ export const DraggableQueueItem: React.FC<DraggableQueueItemProps> = ({
   isCurrentSong,
   onPlay,
   onRemove,
-  onDragStart,
-  onDragOver,
   onDrop,
 }) => {
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData('text/plain', index.toString());
-    onDragStart(index);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    onDragOver(index);
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -38,26 +32,26 @@ export const DraggableQueueItem: React.FC<DraggableQueueItemProps> = ({
     onDrop(fromIndex, index);
   };
 
+  const itemClasses = isCurrentSong
+    ? 'bg-purple-200 border-purple-400 shadow-md'
+    : 'bg-gray-50 hover:bg-gray-100 border-gray-200 hover:border-gray-300';
+
+  const textClasses = isCurrentSong ? 'text-purple-800' : 'text-gray-700';
+
   return (
     <div
       draggable
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      className={`p-3 rounded-lg border group cursor-move transition-all duration-200 ${
-        isCurrentSong
-          ? 'bg-purple-200 border-purple-400 shadow-md'
-          : 'bg-gray-50 hover:bg-gray-100 border-gray-200 hover:border-gray-300'
-      }`}
+      className={`p-3 rounded-lg border group cursor-move transition-all duration-200 ${itemClasses}`}
     >
       <div className="flex items-center justify-between">
         <button
           onClick={() => onPlay(song.queueId)}
           className="flex-1 text-left min-w-0"
         >
-          <div className={`font-medium truncate text-sm ${
-            isCurrentSong ? 'text-purple-800' : 'text-gray-700'
-          }`}>
+          <div className={`font-medium truncate text-sm ${textClasses}`}>
             <span className="text-gray-400 mr-2">⋮⋮</span>
             {index + 1}. {song.title}
           </div>
