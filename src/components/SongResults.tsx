@@ -71,7 +71,7 @@ export const SongResults: React.FC<SongResultsProps> = ({
 
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-8 border border-blue-200/30 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-3xl"></div>
       <h3 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
         🎵 Search Results
       </h3>

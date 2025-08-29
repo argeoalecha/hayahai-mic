@@ -61,7 +61,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-sky-400">
+    <div className="min-h-screen bg-gradient-to-br from-teal-800 via-teal-600 to-teal-500">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-6 lg:py-8">
         {/* Header - only show when no queue */}
         {queue.length === 0 && (

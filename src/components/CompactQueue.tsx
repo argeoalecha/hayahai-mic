@@ -22,7 +22,7 @@ export const CompactQueue: React.FC<CompactQueueProps> = ({
 
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-4 mb-4 border border-blue-200/30 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-2xl"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-2xl"></div>
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
           <div className="text-sm font-medium text-blue-600 mb-1">🎵 NOW PLAYING</div>

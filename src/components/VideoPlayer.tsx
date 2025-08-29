@@ -10,7 +10,7 @@ interface VideoPlayerProps {
 
 const NoSongState = () => (
   <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center border border-blue-200/30 relative overflow-hidden">
-    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
+    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-3xl"></div>
     <div className="py-16 text-gray-400">
       <div className="text-6xl mb-4">🎤</div>
       <h3 className="text-xl font-medium">Ready to sing?</h3>
@@ -35,7 +35,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ currentSong, onVideoEn
 
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center border border-blue-200/30 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-3xl"></div>
       <div className="bg-gradient-to-r from-blue-500 to-sky-500 text-white p-4 rounded-2xl mb-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-bl-3xl"></div>
         <h3 className="text-2xl font-bold relative z-10">

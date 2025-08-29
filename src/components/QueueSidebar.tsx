@@ -33,7 +33,7 @@ export const QueueSidebar: React.FC<QueueSidebarProps> = ({
 
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-blue-200/30 lg:sticky top-4 max-h-[calc(100vh-2rem)] overflow-hidden flex flex-col min-h-[400px] relative">
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-3xl"></div>
       <div className="flex items-center justify-between mb-6 mt-2">
         <h3 className="text-2xl font-bold text-gray-800 flex items-center">
           🎵 Queue ({queue.length})

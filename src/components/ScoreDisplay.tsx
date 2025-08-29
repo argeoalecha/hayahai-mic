@@ -101,7 +101,7 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
     <div className="space-y-4">
       {/* Main Score Display */}
       <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-blue-200/30 relative overflow-hidden min-w-[200px]">
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-sky-400 rounded-t-3xl"></div>
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-t-3xl"></div>
         
         <div className="text-center mb-6 mt-2">
           <h3 className="text-xl font-bold text-gray-800 mb-4">Live Score</h3>
