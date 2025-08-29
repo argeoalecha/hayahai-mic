@@ -239,6 +239,12 @@ export const usePerformanceScoring = () => {
       volumeReadings: [],
       timingPoints: [],
       recentScores: [],
+      smoothedMetrics: {
+        pitchAccuracy: 0,
+        timingAccuracy: 0,
+        volumeConsistency: 0,
+        overallScore: 0,
+      },
     };
     stopScoring();
   }, [stopScoring]);
